@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:paddingBottom="dimen"
     android:paddingRight=""
-    >
+    android:paddingBottom="dimen"
+    tools:context=".MainActivity">
 
 
     <Button
@@ -17,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="QR Code Scan"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="681dp" />
+        tools:layout_editor_absoluteY="681dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +29,8 @@
         android:layout_height="wrap_content"
         android:text="NAMA"
         tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="349dp" />
+        tools:layout_editor_absoluteY="349dp"
+        />
 
     <TextView
         android:id="@+id/textViewNama"
