@@ -24,7 +24,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainActivity1 {
     //view object
     private Button buttonScanning;
-    private TextView textViewName,textViewClass,textViewId;
+    private TextView textViewName, textViewClass, textViewId;
     //qr scanning object
     private IntentIntegrator qrScan;
     private Patterns patterns;
@@ -49,26 +49,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonScanning.setOnClickListener(this);
 
     }
+
     //untuk mendapatkan hasil scanning
     @Override
-    public void  onActivityresult(int requestCode, int resultCode, Intent data){
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode,data);
+    public void onActivityresult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             //Jika qrcode tidak ada sama sekali
-            if (result.getContents()== null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Hasil Scanning tidak ada", Toast.LENGTH_LONG).show();
 
-            }else if (patterns.WEB_URL.matcher(result.getContents()).matches()) {
+            } else if (patterns.WEB_URL.matcher(result.getContents()).matches()) {
                 Intent visitUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getContents()));
                 startActivity(visitUrl);
-            } else if (patterns.PHONE.matcher(result.getContents()).matches()){
+            } else if (patterns.PHONE.matcher(result.getContents()).matches()) {
                 String telp = String.valueOf(result.getContents());
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse(("tel:" + telp)));
                 StartActivity(callIntent);
                 try {
                     startActivity(Intent.createChooser(callIntent, "waiting..."));
-                }catch (android.content.ActivityNotFoundException ex) {
+                } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(MainActivity.this, "no phone apk client.", Toast.LENGTH_SHORT).show();
                 }
                 // Jika qr code tidak ditemukan datanya
@@ -84,16 +85,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
 
                 }
-                }
-            }else {
-
-                    super.onActivityResult(requestCode, resultCode, data);
-                }
             }
+        } else {
+
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
     private void StartActivity(Intent callIntent) {
     }
+    
+        try
 
+    {
+        IntentResult result;
+        String
+                geoUri = result.getContents();
+        Intent intent = new
+                Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+        //Set Package
+
+        intent.setPackage(("com.google.android.apps.maps"));
+        //Set Flag
+
+        intent.setFlags((Intent.FLAG_ACTIVITY_NEW_TASK));
+        startActivity(intent);
+    }else {
+        int requestCode;
+        int resultCode;
+        Intent data;
+        super.onActivityResult(requestCode,resultCode,data);   
+    }
+        
+    }
 
     @Override
     public void onClick(View view) {
